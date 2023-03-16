@@ -28,7 +28,7 @@ class RecipeBrowser
             )));
         if ( is_wp_error( $response ) )
         {
-            return 'something went wrong----------------------------------------------------';
+            return 'something went wrong while getting data';
         } else 
         {
             $response_data = wp_remote_retrieve_body( $response );
@@ -41,8 +41,8 @@ class RecipeBrowser
 
 if (class_exists('RecipeBrowser')){
     $RecipeBrowser = new RecipeBrowser();
-    $data = $RecipeBrowser->data('chicken','high-protein');
-
+    $data = $RecipeBrowser->data('chicken','');
+    echo ($data['hits'][0]['recipe']['label']);
     //$data["hits['recipe['label']']"];
     //echo "<script>alert(".$data.")</script>";
 
