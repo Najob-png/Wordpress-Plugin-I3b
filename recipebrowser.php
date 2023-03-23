@@ -15,6 +15,18 @@ Text Domain: yibist-plugin
 
 defined('ABSPATH') or die('no');
 
+class RecipeBrowser {
+	public shortcodeyanni $shortcodeyanni;
+
+	function __construct() {
+		include_once 'shortcodeyanni.php';
+		$this->shortcodeyanni = new shortcodeyanni();
+	}
+
+	function register() {
+		add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
+	}
+}
 class Api
 {
     public static array $apiargs = array();
@@ -53,4 +65,13 @@ class Api
             return self::$apiargs["q=$q$append"];
         }
     }
+}
+
+if (class_exists('Api')) {
+    $Api = new Api();
+    $data = $Api->data('chicken', array('diet' => 'high-protein'));
+    //var_dump($data);
+    var_dump(Api::$apiargs);
+    //$data["hits['recipe['label']']"];
+    //echo "<script>alert(".$data.")</script>";
 }
