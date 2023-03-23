@@ -53,8 +53,8 @@ class Api
             return self::$apiargs["q=$q$append"];
         }
     }
-<<<<<<< Updated upstream
-=======
+
+
 }
 
 
@@ -66,5 +66,5 @@ if (class_exists('RecipeBrowser')){
     //$data["hits['recipe['label']']"];
     //echo "<script>alert(".$data.")</script>";
 
->>>>>>> Stashed changes
+
 }
