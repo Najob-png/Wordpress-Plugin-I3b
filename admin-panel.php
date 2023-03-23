@@ -14,7 +14,7 @@ class Admin
 	//Attribute für den Admin Panel
 	public $titel = "Admin site for recipe browser";
 	public $titelMenu = "Admin Panel";
-	public $menuSlug = "Admin";
+	public $menuSlug = "AdminPanel";
 
 	public function createAdminPanel()
 	{
@@ -39,7 +39,6 @@ class Admin
 				<select id="theme">
 					<option value="light">Light</option>
 					<option value="dark">Dark</option>
-					<option value="colorful">Colorful</option>
 				</select><br>
 				<input type="submit" value="apply">
 			</form>
