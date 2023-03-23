@@ -20,7 +20,6 @@ $adminPanel = new Admin();
 
 class RecipeBrowser
 {
-
     public function data(string $q, string $d)
     {
         $response = wp_remote_get("https://edamam-recipe-search.p.rapidapi.com/search?q=$q&diet=$d",array(

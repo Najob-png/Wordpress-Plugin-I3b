@@ -8,42 +8,43 @@ class Admin
 {
 	public function __construct()
 	{
-		add_action( 'adminmenu', 'admin' );
+		add_action("admin_menu", array($this, "createAdminPanel"));
 	}
 
 	//Attribute für den Admin Panel
 	public $titel = "Admin site for recipe browser";
-	public $titelMenu = "Admin"; //Name ändern
-	public $description = "Setting for the recipiebrowser plugin";
-	public $urlSlug = "Admin"; //Name ändern
-	public $icon = "🍳";
-	public $position = 0;
+	public $titelMenu = "Admin Panel";
+	public $menuSlug = "Admin";
 
 	public function createAdminPanel()
 	{
-		//Schaut nach, ob Admin Panel bereits existiert
-		$menu_url = menu_page_url( 'Admin', false );
-
-		if(!$menu_url)
-		{
-			add_menu_page
-			(
-				$this->titel,
-				$this->titelMenu,
-				$this->description,
-				$this->urlSlug,
-				$this->adminPanelContent(),
-				$this->icon,
-				$this->position
-			);
-		}
+		add_options_page
+		(
+			$this->titel,
+			$this->titelMenu,
+			'manage_options',
+			$this->menuSlug,
+			array($this, 'adminPanelContent')
+		);
 	}
 	public function adminPanelContent()
 	{
-		echo '<div class="wrap">';
-		echo '<h1>Test</h1>';
-		echo '<p>Inhalt</p>';
-		echo '</div>';
+		echo
+		'
+			<div class="wrap" xmlns="http://www.w3.org/1999/html">
+			<h1>Settings recipie browser plugin</h1>
+			<h2>Theme</h2>
+			<form>
+				<label for="theme">Theme</label><br>
+				<select id="theme">
+					<option value="light">Light</option>
+					<option value="dark">Dark</option>
+					<option value="colorful">Colorful</option>
+				</select><br>
+				<input type="submit" value="apply">
+			</form>
+			</div>
+		';
 	}
 
 	private function adminFile()
