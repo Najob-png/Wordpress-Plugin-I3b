@@ -39,7 +39,7 @@ class RecipeBrowser
 }
 
 
-if (class_exists('RecipeBrowser')){
+if (class_exists('RecipeBrowser') AND !empty($uploadZoneData[1])){
     $RecipeBrowser = new RecipeBrowser();
     $data = $RecipeBrowser->data('chicken','');
     echo ($data['hits'][0]['recipe']['label']);
