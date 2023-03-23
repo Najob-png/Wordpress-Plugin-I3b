@@ -18,14 +18,17 @@ defined('ABSPATH') or die('no');
 class Api
 {
     public static array $apiargs = array();
-
+    private static array $apiarglimits = array("diet","health","cuisineType","mealType","dishType","calories","glycemicIndex","excluded");
     public function data(string $q, ?array $args)
     {
         $url = "https://edamam-recipe-search.p.rapidapi.com/search?q=$q";
         $append = "";
         if (isset($args)) {
             foreach ($args as $key => $val) {
-
+                if (!in_array($key,self::$apiarglimits))
+                {
+                    return 'a wrong api parameter was inserted';
+                }
                 $append .= "&" . $key . "=" . $val;
             }
         }
@@ -50,13 +53,4 @@ class Api
             return self::$apiargs["q=$q$append"];
         }
     }
-}
-
-if (class_exists('Api')) {
-    $Api = new Api();
-    $data = $Api->data('chicken', array('diet' => 'high-protein'));
-    //var_dump($data);
-    var_dump(Api::$apiargs);
-    //$data["hits['recipe['label']']"];
-    //echo "<script>alert(".$data.")</script>";
 }
