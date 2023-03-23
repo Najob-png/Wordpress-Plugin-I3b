@@ -15,8 +15,12 @@ Text Domain: yibist-plugin
 
 defined('ABSPATH') or die('no');
 
+require_once("admin-panel.php");
+$adminPanel = new Admin();
+
 class RecipeBrowser
 {
+
     public function data(string $q, string $d)
     {
         $response = wp_remote_get("https://edamam-recipe-search.p.rapidapi.com/search?q=$q&diet=$d",array(
@@ -36,14 +40,4 @@ class RecipeBrowser
             return $decoded_data;
         }
     }
-}
-
-
-if (class_exists('RecipeBrowser') AND !empty($uploadZoneData[1])){
-    $RecipeBrowser = new RecipeBrowser();
-    $data = $RecipeBrowser->data('chicken','');
-    echo ($data['hits'][0]['recipe']['label']);
-    //$data["hits['recipe['label']']"];
-    //echo "<script>alert(".$data.")</script>";
-
 }

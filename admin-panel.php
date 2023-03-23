@@ -4,9 +4,13 @@ if ( ! defined( 'ABSPATH' ) )
 {
 	exit;
 }
-
 class Admin
 {
+	public function __construct()
+	{
+		add_action( 'adminmenu', 'admin' );
+	}
+
 	//Attribute für den Admin Panel
 	public $titel = "Admin site for recipe browser";
 	public $titelMenu = "Admin"; //Name ändern
@@ -32,7 +36,6 @@ class Admin
 				$this->icon,
 				$this->position
 			);
-			add_action("adminmenu", "createAdminPanel");
 		}
 	}
 	public function adminPanelContent()
