@@ -1,4 +1,3 @@
-
 <?php
 $Api = new Api();
 class shortcodeyanni {
