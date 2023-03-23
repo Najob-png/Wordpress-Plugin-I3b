@@ -67,11 +67,8 @@ class Api
     }
 }
 
-if (class_exists('Api')) {
-    $Api = new Api();
-    $data = $Api->data('chicken', array('diet' => 'high-protein'));
-    //var_dump($data);
-    var_dump(Api::$apiargs);
-    //$data["hits['recipe['label']']"];
-    //echo "<script>alert(".$data.")</script>";
+
+if (class_exists('RecipeBrowser')){
+    $RecipeBrowser = new RecipeBrowser();
+	$RecipeBrowser->register();
 }
