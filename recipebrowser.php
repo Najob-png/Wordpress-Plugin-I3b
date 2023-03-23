@@ -19,6 +19,8 @@ class RecipeBrowser {
 	public shortcodeyanni $shortcodeyanni;
 
 	function __construct() {
+		require_once("admin-panel.php");
+		$adminPanel = new Admin();
 		include_once 'shortcodeyanni.php';
 		$this->shortcodeyanni = new shortcodeyanni();
 	}
