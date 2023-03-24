@@ -14,24 +14,18 @@ Text Domain: yibist-plugin
 */
 
 defined('ABSPATH') or die('no');
+
 class RecipeBrowser {
-    public shortcodeyanni $shortcodeyanni;
-    public randomshort $randomshort;
+	public shortcodeyanni $shortcodeyanni;
 
-    function __construct() {
-        include_once 'shortcodeyanni.php';
-        include_once 'randomshort.php';
-        $this->shortcodeyanni = new shortcodeyanni();
-        $this->randomshort = new randomshort();
-    }
+	function __construct() {
+		include_once 'shortcodeyanni.php';
+		$this->shortcodeyanni = new shortcodeyanni();
+	}
 
-
-
-    function register() {
-        add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
-        add_shortcode( 'rand_meal_shortcode', array( $this->randomshort, 'rand_meal_shortcode' ) );
-    }
-    
+	function register() {
+		add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
+	}
 }
 class Api
 {
@@ -71,12 +65,10 @@ class Api
             return self::$apiargs["q=$q$append"];
         }
     }
-
-
 }
 
 
 if (class_exists('RecipeBrowser')){
     $RecipeBrowser = new RecipeBrowser();
-    $RecipeBrowser->register();
+	$RecipeBrowser->register();
 }
