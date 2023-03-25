@@ -15,61 +15,34 @@ Text Domain: yibist-plugin
 
 defined('ABSPATH') or die('no');
 class RecipeBrowser {
-	public shortcodeyanni $shortcodeyanni;
+    public shortcodeyanni $shortcodeyanni;
+    public randomshort $randomshort;
 
-	function __construct() {
-		include_once 'shortcodeyanni.php';
-		$this->shortcodeyanni = new shortcodeyanni();
-	}
+    function __construct() {
+        include_once 'shortcodeyanni.php';
+        include_once 'randomshort.php';
+        $this->shortcodeyanni = new shortcodeyanni();
+        $this->randomshort = new randomshort();
+    }
 
-	function register() {
-		add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
-	}
-}
-class Api
-{
-    public static array $apiargs = array();
-    private static array $apiarglimits = array("diet","health","cuisineType","mealType","dishType","calories","glycemicIndex","excluded");
-    public function data(string $q, ?array $args)
-    {
-        $url = "https://edamam-recipe-search.p.rapidapi.com/search?q=$q";
-        $append = "";
-        if (isset($args)) {
-            foreach ($args as $key => $val) {
-                if (!in_array($key,self::$apiarglimits))
-                {
-                    return 'a wrong api parameter was inserted';
-                }
-                $append .= "&" . $key . "=" . $val;
-            }
-        }
-        if (!array_key_exists("q=$q$append", self::$apiargs)) {
-            $url .= $append;
-            $response = wp_remote_get($url, array(
-                'timeout' => 300,
-                'httpversion' => '1.1',
-                'headers' => array(
-                    'X-RapidAPI-Key' => 'cafa3125b2msh6787cd3e1a59ffdp137c38jsnaf2104651e12',
-                    'X-RapidAPI-Host' => 'edamam-recipe-search.p.rapidapi.com'
-                )));
-            if (is_wp_error($response)) {
-                return 'something went wrong while getting data';
-            } else {
-                $response_data = wp_remote_retrieve_body($response);
-                $decoded_data = json_decode($response_data, true);
-                self::$apiargs["q=$q$append"] = $decoded_data;
-                return $decoded_data;
-            }
-        } else {
-            return self::$apiargs["q=$q$append"];
-        }
+
+
+    function register() {
+        add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
+        add_shortcode( 'rand_meal_shortcode', array( $this->randomshort, 'rand_meal_shortcode' ) );
     }
 
 
 }
 
 
-if (class_exists('RecipeBrowser')){
+if (class_exists('RecipeBrowser')) {
     $RecipeBrowser = new RecipeBrowser();
 	$RecipeBrowser->register();
+    //$data = $RecipeBrowser->data('chicken','');
+    //echo ($data['hits'][0]['recipe']['label']);
+    //$data["hits['recipe['label']']"];
+    //echo "<script>alert(".$data.")</script>";
+
+
 }
