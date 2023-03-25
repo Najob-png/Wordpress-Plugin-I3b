@@ -23,7 +23,18 @@ class randomshort
 </form>';
 
                 $label = $data['hits'][$meal_number]['recipe']['label'];
-                $field .= "<br> <p>$label</p>";
+                $url = $data['hits'][$meal_number]['recipe']['url'];
+                $image = $data['hits'][$meal_number]['recipe']['image'];
+
+
+                $field .= "<br> <p>$label</p> <br>
+                        <a href=$url>$url</a><br>
+                         <img src='$image' width='250' height='300'> 
+                        ";
+                foreach ($data['hits'][$meal_number]['recipe']['ingredientLines'] as $item => $value) {
+
+                    $field .= "<br> <p>$value</p> <br>";
+                }
 
             } else {
                 $field = '<form action="" method="post">
