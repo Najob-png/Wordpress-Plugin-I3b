@@ -1,4 +1,5 @@
 <?php
+include_once "Api.php";
 class shortcodeyanni {
 	public function __construct() {
 
@@ -16,23 +17,21 @@ class shortcodeyanni {
 							<input type='text' placeholder='Search..' name='q'>
 							<label for='diet'>Choose a diet:</label>
 
-							<select name='diet'>
-							  <option value='balanced'>balanced</option>
-							  <option value='high-fiber'>high-fiber</option>
-							  <option value='high-protein'>high-protein</option>
-							  <option value='low-carb'>low-carb</option>
-							  <option value='low-fat'>low-fat</option>
-							  <option value='low-sodium'>low-sodium</option>
-							</select>
-							
-							<label for='health'>Choose health:</label>
+							<select name='diet'>";
+							foreach (Api::$apiarglimits['diet'] as $value){
+								$string.="<option value='$value'>$value</option>";
+							}
 
-							<select name='health'>
-							  <option value='vegan'>vegan</option>
-							  <option value='vegetarian'>vegetarian</option>
-							  <option value='gluten-free'>gluten-free</option>
-							  <option value='low-sugar'>low-sugar</option>
-							</select>
+
+							$string.="</select>
+							
+							<select name='health'>";
+							foreach (Api::$apiarglimits['health'] as $value){
+								$string.="<option value='$value'>$value</option>";
+							}
+
+
+			$string.="</select>
 							<button type='submit'><i class='fa fa-search'></i></button>
 						</form>
 					</div>
@@ -40,8 +39,8 @@ class shortcodeyanni {
 				</body>";
 		}
 		if ( isset( $_POST['q'] ) ) {
-			$Api = new Api();
-			$data = $Api->data($_POST['q'],array('diet'=>$_POST['diet'],'health'=>$_POST['health']));
+
+			$data = Api::data($_POST['q'],array('diet'=>$_POST['diet'],'health'=>$_POST['health']));
 			$string =
 				"<body>
 
@@ -78,7 +77,8 @@ class shortcodeyanni {
 				    
 				  </tr>
 				  ";
-				foreach ($data['hits'] as $key => $value) {
+			var_dump($data);
+				/*foreach ($data['hits'] as $key => $value) {
 					$lable = $value['recipe']['label'];
 					$string .="	  
 				  <tr>
@@ -86,7 +86,7 @@ class shortcodeyanni {
 
 				  </tr>
 				  ";
-				}
+				}*/
 
 				echo "
 				</table>
