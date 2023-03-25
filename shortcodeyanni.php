@@ -24,7 +24,7 @@ class shortcodeyanni {
 
 
 							$string.="</select>
-							
+							<label for='health'>Choose health:</label>
 							<select name='health'>";
 							foreach (Api::$apiarglimits['health'] as $value){
 								$string.="<option value='$value'>$value</option>";
@@ -32,7 +32,7 @@ class shortcodeyanni {
 
 
 							$string.="</select>
-
+							<label for='cuisineType'>Choose cuisineType:</label>
 							<select name='cuisineType'>";
 							foreach (Api::$apiarglimits['cuisineType'] as $value){
 							$string.="<option value='$value'>$value</option>";
@@ -40,7 +40,7 @@ class shortcodeyanni {
 
 
 							$string.="</select>
-
+							<label for='mealType'>Choose mealType:</label>
 							<select name='mealType'>";
 							foreach (Api::$apiarglimits['mealType'] as $value){
 							$string.="<option value='$value'>$value</option>";
@@ -48,7 +48,7 @@ class shortcodeyanni {
 
 
 							$string.="</select>
-
+							<label for='dishType'>Choose dishType:</label>
 							<select name='dishType'>";
 							foreach (Api::$apiarglimits['dishType'] as $value){
 							$string.="<option value='$value'>$value</option>";
@@ -81,44 +81,44 @@ class shortcodeyanni {
 							<label for='diet'>Choose a diet:</label>
 
 							<select name='diet'>";
-			foreach (Api::$apiarglimits['diet'] as $value){
-				$string.="<option value='$value'>$value</option>";
-			}
+							foreach (Api::$apiarglimits['diet'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
 
 
-			$string.="</select>
-							
+							$string.="</select>
+							<label for='health'>Choose health:</label>
 							<select name='health'>";
-			foreach (Api::$apiarglimits['health'] as $value){
-				$string.="<option value='$value'>$value</option>";
-			}
+							foreach (Api::$apiarglimits['health'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
 
 
-			$string.="</select>
-
+							$string.="</select>
+							<label for='cuisineType'>Choose cuisineType:</label>
 							<select name='cuisineType'>";
-			foreach (Api::$apiarglimits['cuisineType'] as $value){
-				$string.="<option value='$value'>$value</option>";
-			}
+							foreach (Api::$apiarglimits['cuisineType'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
 
 
-			$string.="</select>
-
+							$string.="</select>
+							<label for='mealType'>Choose mealType:</label>
 							<select name='mealType'>";
-			foreach (Api::$apiarglimits['mealType'] as $value){
-				$string.="<option value='$value'>$value</option>";
-			}
+							foreach (Api::$apiarglimits['mealType'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
 
 
-			$string.="</select>
-
+							$string.="</select>
+							<label for='dishType'>Choose dishType:</label>
 							<select name='dishType'>";
-			foreach (Api::$apiarglimits['dishType'] as $value){
-				$string.="<option value='$value'>$value</option>";
-			}
+							foreach (Api::$apiarglimits['dishType'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
 
 
-			$string.="</select>
+							$string.="</select>
 							<button type='submit'><i class='fa fa-search'></i></button>
 						</form>
 					</div>
