@@ -39,10 +39,4 @@ class RecipeBrowser {
 if (class_exists('RecipeBrowser')) {
     $RecipeBrowser = new RecipeBrowser();
 	$RecipeBrowser->register();
-    //$data = $RecipeBrowser->data('chicken','');
-    //echo ($data['hits'][0]['recipe']['label']);
-    //$data["hits['recipe['label']']"];
-    //echo "<script>alert(".$data.")</script>";
-
-
 }

@@ -76,6 +76,10 @@ class Api
             if (is_int(array_key_first($args))) {
                 $used = array();
                 foreach ($args as $val) {
+                    if (!isset($val2))
+                    {
+                        continue;
+                    }
                     $found = false;
                     foreach (Api::$apiarglimits as $key2 => $val2) {
                         if (in_array($val, $val2)) {
@@ -113,7 +117,7 @@ class Api
                 */
             } else {
                 foreach ($args as $key => $val) {
-                    if (array_key_exists($key,self::$apiarglimits))
+                    if (!array_key_exists($key,self::$apiarglimits))
                     {
                         return 'a wrong api parameter was inserted';
                     }
