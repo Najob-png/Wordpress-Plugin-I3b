@@ -95,3 +95,12 @@ class shortcodeyanni {
 		return $string;
 	}
 }
+/*
+ * This gives you all values out of the array with key and value. to access the array write Api::$apiarglimits
+foreach (Api::$apiarglimits as $key => $value) {
+    foreach ($value as $key2 => $value2) {
+        echo $key . " + " . $value2;
+        echo "<br>";
+    }
+}
+*/
