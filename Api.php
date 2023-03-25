@@ -72,13 +72,12 @@ class Api
     {
         $url = "https://edamam-recipe-search.p.rapidapi.com/search?q=$q";
         $append = "";
-        // args = array of string
         if (isset($args)) {
             if (is_int(array_key_first($args))) {
                 $used = array();
                 foreach ($args as $val) {
                     $found = false;
-                    foreach (Api::$apiarglimits /* array(argLim) of arrays ($val2) */ as $key2 => $val2) {
+                    foreach (Api::$apiarglimits as $key2 => $val2) {
                         if (in_array($val, $val2)) {
                             $append .= "&" . $key2 . "=" . $val;
                             if (isset($used[$key2])) {
@@ -114,6 +113,10 @@ class Api
                 */
             } else {
                 foreach ($args as $key => $val) {
+                    if (array_key_exists($key,self::$apiarglimits))
+                    {
+                        return 'a wrong api parameter was inserted';
+                    }
                     $append .= "&" . $key . "=" . $val;
                 }
             }
