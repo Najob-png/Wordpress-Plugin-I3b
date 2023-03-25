@@ -60,6 +60,11 @@ class shortcodeyanni {
 						</form>
 					</div>
 				</div>
+				<table>
+				  <tr>
+				    <th>Name</th>
+				    
+				  </tr>
 				</body>";
 		}
 		if ( isset( $_POST['q'] ) ) {
@@ -75,22 +80,45 @@ class shortcodeyanni {
 							<input type='text' placeholder='Search..' name='q'>
 							<label for='diet'>Choose a diet:</label>
 
-							<select name='diet'>
-							  <option value='balanced'>balanced</option>
-							  <option value='high-fiber'>high-fiber</option>
-							  <option value='high-protein'>high-protein</option>
-							  <option value='low-carb'>low-carb</option>
-							  <option value='low-fat'>low-fat</option>
-							  <option value='low-sodium'>low-sodium</option>
-							</select>
-							
-							<label for='health'>Choose health:</label>
+							<select name='diet'>";
+			foreach (Api::$apiarglimits['diet'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
 
-							<select name='health'>
-							  <option value='vegan'>vegan</option>
-							  <option value='vegetarian'>vegetarian</option>
-							  <option value='low-sugar'>low-sugar</option>
-							</select>
+
+			$string.="</select>
+							
+							<select name='health'>";
+			foreach (Api::$apiarglimits['health'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select>
+
+							<select name='cuisineType'>";
+			foreach (Api::$apiarglimits['cuisineType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select>
+
+							<select name='mealType'>";
+			foreach (Api::$apiarglimits['mealType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select>
+
+							<select name='dishType'>";
+			foreach (Api::$apiarglimits['dishType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select>
 							<button type='submit'><i class='fa fa-search'></i></button>
 						</form>
 					</div>
@@ -100,7 +128,7 @@ class shortcodeyanni {
 				    <th>Name</th>
 				    
 				  </tr>
-				  ";
+				</body>";
 
 				foreach ($data['hits'] as $key => $value) {
 					$lable = $value['recipe']['label'];
