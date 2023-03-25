@@ -9,9 +9,9 @@ class shortcodeyanni {
 			$string =
 				"<body>
 
-				<div class='topnav'>
+				<div>
 					
-					<div class='search-container'>
+					<div>
 						<form action='' method='post'>
 							<input type='text' placeholder='Search..' name='q'>
 							<label for='diet'>Choose a diet:</label>
@@ -33,7 +33,7 @@ class shortcodeyanni {
 							  <option value='gluten-free'>gluten-free</option>
 							  <option value='low-sugar'>low-sugar</option>
 							</select>
-							<button type='submit'><i class='fa fa-search'></i></button>
+							<button type='submit'><i></i></button>
 						</form>
 					</div>
 				</div>
