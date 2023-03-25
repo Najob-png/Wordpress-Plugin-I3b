@@ -16,23 +16,26 @@ Text Domain: yibist-plugin
 defined('ABSPATH') or die('no');
 
 class RecipeBrowser {
-	public shortcodeyanni $shortcodeyanni;
-	public Admin $adminPanel;
-	function __construct() {
-		require_once("admin-panel.php");
-		$this->adminPanel = new Admin();
-		include_once 'shortcodeyanni.php';
-		$this->shortcodeyanni = new shortcodeyanni();
-	}
+    public shortcodeyanni $shortcodeyanni;
+    public randomshort $randomshort;
 
-	function register() {
-		add_action('admin_init', array($this->adminPanel, 'adminPanelSettingFields'));
-		add_action("admin_menu", array($this->adminPanel, "createAdminPanel"));
-		add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
-	}
+    function __construct() {
+        include_once 'shortcodeyanni.php';
+        include_once 'randomshort.php';
+        $this->shortcodeyanni = new shortcodeyanni();
+        $this->randomshort = new randomshort();
+    }
+
+
+
+    function register() {
+        add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
+        add_shortcode( 'rand_meal_shortcode', array( $this->randomshort, 'rand_meal_shortcode' ) );
+    }
+
 }
 
-if (class_exists('RecipeBrowser')){
+if (class_exists('RecipeBrowser')) {
     $RecipeBrowser = new RecipeBrowser();
-	$RecipeBrowser->register();
+    $RecipeBrowser->register();
 }
