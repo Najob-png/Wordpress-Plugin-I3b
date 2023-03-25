@@ -31,7 +31,31 @@ class shortcodeyanni {
 							}
 
 
-			$string.="</select>
+							$string.="</select>
+
+							<select name='cuisineType'>";
+							foreach (Api::$apiarglimits['cuisineType'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
+
+
+							$string.="</select>
+
+							<select name='mealType'>";
+							foreach (Api::$apiarglimits['mealType'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
+
+
+							$string.="</select>
+
+							<select name='dishType'>";
+							foreach (Api::$apiarglimits['dishType'] as $value){
+							$string.="<option value='$value'>$value</option>";
+							}
+
+
+							$string.="</select>
 							<button type='submit'><i class='fa fa-search'></i></button>
 						</form>
 					</div>
@@ -77,8 +101,8 @@ class shortcodeyanni {
 				    
 				  </tr>
 				  ";
-			var_dump($data);
-				/*foreach ($data['hits'] as $key => $value) {
+
+				foreach ($data['hits'] as $key => $value) {
 					$lable = $value['recipe']['label'];
 					$string .="	  
 				  <tr>
@@ -86,7 +110,7 @@ class shortcodeyanni {
 
 				  </tr>
 				  ";
-				}*/
+				}
 
 				echo "
 				</table>
