@@ -74,7 +74,7 @@ class Api
         $append = "";
         // args = array of string
         if (isset($args)) {
-            if (count($args) != count($args, COUNT_RECURSIVE)) {
+            if (is_int(array_key_first($args))) {
                 $used = array();
                 foreach ($args as $val) {
                     $found = false;
@@ -114,10 +114,6 @@ class Api
                 */
             } else {
                 foreach ($args as $key => $val) {
-                    if (!in_array($key,self::$apiarglimits))
-                    {
-                        return 'a wrong api parameter was inserted';
-                    }
                     $append .= "&" . $key . "=" . $val;
                 }
             }
