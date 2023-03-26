@@ -7,7 +7,7 @@ Plugin Name: recipebrowser
 Plugin URI:
 Description: -
 Version: 1.0.0
-Author: Michael Galambos
+Author: Michael Galambos, Nickolaj Muster, Bojan Rodic, Yannick Contich
 Author URI:
 License: GPLv2 or later
 Text Domain: yibist-plugin
