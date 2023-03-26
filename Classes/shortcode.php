@@ -1,17 +1,25 @@
 <?php
 include "Api.php";
+include "Style.php";
 class shortcode
 {
+	//Object, welche mit einer Funktion Style returned
+	public Style $style;
     function enqueue(){
-        wp_enqueue_style('recipe_plugin_style', plugins_url('/assets/style.css', __FILE__));
+        wp_enqueue_style('recipe_plugin_style', plugins_url('/assets/style.php', __FILE__));
     }
 
-
 	function shotrecipesearch(): string {
+
+		//Object, welche mit einer Funktion Style returned
+		//config String beinhaltet css code
+		$style = new Style();
+		$config = $style->getConfig();
+
 		if (!isset( $_POST['q'] ) ) {
 			$string =
 				"<body>
-				<div class='topnav'>
+				<div class='topnav' style='$config'>
 					<div class='search-container'>
 						<form action='' method='post'>
 							<input type='text' placeholder='Search..' name='q'>
@@ -84,7 +92,7 @@ class shortcode
 			$string =
 				"<body>
 
-				<div class='topnav'>
+				<div class='topnav' style='$config'>
 					
 					<div class='search-container'>
 						<form action='' method='post'>
@@ -181,13 +189,17 @@ class shortcode
     function rand_meal_shortcode(): string
     {
 
+	    //Object, welche mit einer Funktion Style returned
+	    //config String beinhaltet css code
+	    $style = new Style();
+	    $config = $style->getConfig();
 
         if (isset($_POST['ingredient'])) {
             $ingredient = $_POST['ingredient'];
             $meal_number = mt_rand(1, 10);
 
             $data = Api::data($ingredient, array('high-protein'));
-            $field = '<form action="" method="post">
+            $field = '<div style="'.$config.'"><form action="" method="post">
       <input type="text" name="ingredient" title="ingredient" id="ingredient" placeholder="Search...">
         <input type="submit" name="submit" id="submit"> 
         
@@ -198,7 +210,7 @@ class shortcode
             $field .= "<br> <p>$label</p>";
 
         } else {
-            $field = '<form action="" method="post">
+            $field = '<div style="'.$config.'"><form action="" method="post">
       <input type="text" name="ingredient" title="ingredient" id="ingredient" placeholder="Search...">
         <input type="submit" name="submit" id="submit">  
 </form>';

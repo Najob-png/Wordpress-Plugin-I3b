@@ -76,7 +76,7 @@ class Adminpanel
 			'font_color',
 			Array('type'=>'string',
 			      'show_in_rest'=>'true',
-			      'font_color' => '#000000')
+			      'font_color' => '#ee0000')
 		);
 		//Fügt spezifisches Feld zu der Gruppe hinzu
 		//API Key Feld
