@@ -26,9 +26,10 @@ class RecipeBrowser {
     }
 
     function register(): void {
+        add_action('wp_enqueue_scripts', array($this->shortcode, 'enqueue'));
+
         add_shortcode( 'shotrecipesearch', array( $this->shortcode, 'shotrecipesearch' ));
         add_shortcode( 'rand_meal_shortcode', array( $this->shortcode, 'rand_meal_shortcode' ));
-        add_action('wp_enqueue_scripts', array($this->shortcode, 'enqueue'));
 	    add_action('admin_init', array($this->adminpanel, 'adminPanelSettingFields'));
 	    add_action("admin_menu", array($this->adminpanel, "createAdminPanel"));
     }

@@ -2,8 +2,8 @@
 include "Api.php";
 class shortcode
 {
-    function enqueue(){
-        wp_enqueue_style('recipe_plugin_style', plugins_url('/assets/style.css', __FILE__));
+    function enqueue(): void{
+        wp_enqueue_style('recipe_plugin_style', plugins_url('../assets/style.css', __FILE__));
     }
 
 
@@ -212,14 +212,14 @@ class shortcode
 
 
 			$field .= "<br> <p>Breackfast</p><br><p>$label</p> <br>
-                         <a href=$url><img src='$image' width='250' height='300'></a>
+                         <a href=$url><img src='$image' width='250' height='300' alt='img was not found'></a>
                         ";
 			foreach ($data['hits'][$meal_number]['recipe']['ingredientLines'] as $item => $value) {
 
 				$field .= " <p>$value</p>";
 			}
 			$field .= "<br> <p>Lunch</p><br><p>$label1</p> <br>
-                        <a href=$url1><img src='$image1' width='250' height='300'> </a>
+                        <a href=$url1><img src='$image1' width='250' height='300' alt='img was not found'> </a>
                         ";
 			foreach ($data1['hits'][$meal_number]['recipe']['ingredientLines'] as $item => $value) {
 
@@ -227,7 +227,7 @@ class shortcode
 			}
 
 			$field .= "<br><p>Dinner</p><br><br> <p>$label2</p> <br>
-                        <a href=$url2><img src='$image2' width='250' height='300'></a>
+                        <a href=$url2><img src='$image2' width='250' height='300' alt='img was not found'></a>
                         ";
 			foreach ($data2['hits'][$meal_number]['recipe']['ingredientLines'] as $item => $value) {
 

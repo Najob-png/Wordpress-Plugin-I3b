@@ -70,7 +70,6 @@ class Api
 
     public static function data(?array $args)
     {
-        //var_dump($args);
         $url = "https://edamam-recipe-search.p.rapidapi.com/search?";
         $append = "";
         $qset = false;
@@ -115,7 +114,7 @@ class Api
                     }
                 }
                 /*
-                 * this is a different way to do the code above but I don't now which is faster and I haven't had the chance to check which one is faster.
+                 * this is a different way to do the code above, but I don't know which is faster, and I haven't had the chance to check which one is faster.
                 $used = false;
                 foreach (Api::$apiarglimits as $key => $val) {
                     $val2 = array_intersect($args, $val);
@@ -148,7 +147,7 @@ class Api
             'timeout' => 300,
             'httpversion' => '1.1',
             'headers' => array(
-                'X-RapidAPI-Key' => 'cafa3125b2msh6787cd3e1a59ffdp137c38jsnaf2104651e12',
+                'X-RapidAPI-Key' => get_option('key'),
                 'X-RapidAPI-Host' => 'edamam-recipe-search.p.rapidapi.com'
             )));
         if (is_wp_error($response)) {
