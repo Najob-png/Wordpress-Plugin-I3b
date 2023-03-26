@@ -23,8 +23,8 @@ class RecipeBrowser {
     }
 
     function register(): void {
-        add_shortcode( 'testShortcode', array( $this->shortcode, 'testShortcode' ) );
-        add_shortcode( 'rand_meal_shortcode', array( $this->shortcode, 'rand_meal_shortcode' ) );
+        add_shortcode( 'testShortcode', array( $this->shortcode, 'testShortcode' ));
+        add_shortcode( 'rand_meal_shortcode', array( $this->shortcode, 'rand_meal_shortcode' ));
         add_action('wp_enqueue_scripts', array($this->shortcode, 'enqueue'));
     }
 }
