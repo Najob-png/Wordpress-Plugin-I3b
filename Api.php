@@ -132,6 +132,9 @@ class Api
                 */
             } else {
                 foreach ($args as $key => $val) {
+                    if (!isset($val) or strlen($val) < 1) {
+                        continue;
+                    }
                     if (!array_key_exists($key, self::$apiarglimits)) {
                         return 'a wrong api parameter was inserted';
                     }
