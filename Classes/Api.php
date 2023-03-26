@@ -70,6 +70,7 @@ class Api
 
     public static function data(?array $args)
     {
+        //var_dump($args);
         $url = "https://edamam-recipe-search.p.rapidapi.com/search?";
         $append = "";
         $qset = false;
@@ -82,7 +83,7 @@ class Api
             if (is_int(array_key_first($args))) {
                 $used = array();
                 foreach ($args as $val) {
-                    if (!isset($val)) {
+                    if (!isset($val) or strlen($val) < 1) {
                         continue;
                     }
                     $found = false;
@@ -131,6 +132,9 @@ class Api
                 */
             } else {
                 foreach ($args as $key => $val) {
+                    if (!isset($val) or strlen($val) < 1) {
+                        continue;
+                    }
                     if (!array_key_exists($key, self::$apiarglimits)) {
                         return 'a wrong api parameter was inserted';
                     }
@@ -152,6 +156,7 @@ class Api
         } else {
             $response_data = wp_remote_retrieve_body($response);
             $decoded_data = json_decode($response_data, true);
+            echo $url;
             return $decoded_data;
         }
     }
