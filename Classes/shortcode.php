@@ -7,13 +7,11 @@ class shortcode
     }
 
 
-	function testShortcode(): string {
+	function shotrecipesearch(): string {
 		if (!isset( $_POST['q'] ) ) {
 			$string =
 				"<body>
-
 				<div class='topnav'>
-				    
 					<div class='search-container'>
 						<form action='' method='post'>
 							<input type='text' placeholder='Search..' name='q'>
@@ -145,6 +143,7 @@ class shortcode
 				  <tr>
 				    <th>Name</th>
 				    <th>Picture</th>
+				    <th>Ingredients</th>
 				  </tr>
 				</body>";
 
@@ -156,9 +155,19 @@ class shortcode
 				  
 				  <tr>
 				    <td>$lable</td>
-                    <td><a href='$url ' target='_blank'><img src='$image'width='125' height='150'></a> </td>
-                    
+                    <td><a href='$url ' target='_blank'><img src='$image'width='125' height='150' alt='no image found'></a> </td>
+                    <td>
+                    <table>
+                    ";
 
+
+
+                foreach ($value['recipe']['ingredientLines'] as $value2) {
+                    $string .= "<td>$value2</td>";
+                };
+                $string .="
+                </table>
+                </td>
 				  </tr>
 				  ";
 			}
@@ -191,9 +200,7 @@ class shortcode
         } else {
             $field = '<form action="" method="post">
       <input type="text" name="ingredient" title="ingredient" id="ingredient" placeholder="Search...">
-        <input type="submit" name="submit" id="submit"> 
-        
-        
+        <input type="submit" name="submit" id="submit">  
 </form>';
 
         }

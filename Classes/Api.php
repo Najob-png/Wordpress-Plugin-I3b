@@ -156,7 +156,6 @@ class Api
         } else {
             $response_data = wp_remote_retrieve_body($response);
             $decoded_data = json_decode($response_data, true);
-            echo $url;
             return $decoded_data;
         }
     }
