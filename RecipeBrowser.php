@@ -18,7 +18,7 @@ class RecipeBrowser {
     public shortcode $shortcode;
 
     function __construct() {
-        include_once 'shortcode.php';
+        include_once 'Classes/shortcode.php';
         $this->shortcode = new shortcode();
     }
 

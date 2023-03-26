@@ -13,7 +13,7 @@ class shortcode
                 "<body>
 
 				<div class='topnav'>
-					
+				    
 					<div class='search-container'>
 						<form action='' method='post'>
 							<input type='text' placeholder='Search..' name='q'>
