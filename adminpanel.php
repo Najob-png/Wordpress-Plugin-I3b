@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) )
 {
 	exit;
 }
-class Admin
+class Adminpanel
 {
 	//Attribute für den Admin Panel
 	public $titel = 'Admin Panel Recipebrowser';
@@ -129,18 +129,18 @@ class Admin
 		{
 			$value .=
 				"
-					<option value='light'>Light</option>
-  					<option value='dark' selected>Dark</option>
-				</select>
+						<option value='light'>Light</option>
+	                    <option value='dark' selected>Dark</option>
+					</select>
 				";
 		}
 		else
 		{
 			$value .=
 				"
-					<option value='light' selected>Light</option>
-  					<option value='dark'>Dark</option>
-				</select>
+						<option value='light' selected>Light</option>
+	                    <option value='dark'>Dark</option>
+					</select>
 				";
 		}
 		echo $value;
@@ -153,18 +153,18 @@ class Admin
 		{
 			$value .=
 				"
-					<option value='Arial' selected>Arial</option>
-  					<option value='Helvetica'>Helvetica</option>
-				</select>
+						<option value='Arial' selected>Arial</option>
+	                    <option value='Helvetica'>Helvetica</option>
+					</select>
 				";
 		}
 		else
 		{
 			$value .=
 				"
-					<option value='Arial'>Arial</option>
-  					<option value='Helvetica' selected>Helvetica</option>
-				</select>
+						<option value='Arial'>Arial</option>
+	                    <option value='Helvetica' selected>Helvetica</option>
+					</select>
 				";
 		}
 		echo $value;
@@ -180,9 +180,9 @@ class Admin
 	//Leere Callback Funktion
 	public function sectionCall(){}
 
-	//Fügt CSS fürs Plugin
-	public function addCss()
+	//Sollte Css für Shortcodes hinzufügen
+	public function enqeueStyle()
 	{
-		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ) . 'style.php');
+		wp_enqueue_style( 'style', 'style.php');
 	}
 }

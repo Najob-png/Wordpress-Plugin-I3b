@@ -1,6 +1,4 @@
 <?php
-    header("Content-type: text/css");
-
     $theme = get_option("theme");
     $font = get_option("font");
     $fontColor = get_option("fontColor");
@@ -9,21 +7,24 @@
 
     if($theme == "Light")
     {
-        $color = "#eeeeee";
+	    $color = "#eeeeee";
     }
     else
     {
-        $color = "333333";
+	    $color = "333333";
     }
-?>
-<style>
-    *
-    {
-        font-family: <?php echo $font;?>sans-serif;
-        color: <?php echo $fontColor;?>;
-    }
-    div
-    {
-        background-color: <?php echo $color;?>;
-    }
-</style>
+
+    echo
+	    '
+	    <style>
+	        *
+	        {
+	            font-family: '.$font.', sans-serif !important;
+	            color: '.$fontColor.' !important;
+	        }
+	        div
+	        {
+	            background-color: '.$color.' !important;
+	        }
+	    </style>
+		';
