@@ -148,7 +148,7 @@ class Api
             'timeout' => 300,
             'httpversion' => '1.1',
             'headers' => array(
-                'X-RapidAPI-Key' => 'cafa3125b2msh6787cd3e1a59ffdp137c38jsnaf2104651e12',
+                'X-RapidAPI-Key' => '13f5330593mshf4520ca4aad56e4p183b1djsnf54253726dd0',
                 'X-RapidAPI-Host' => 'edamam-recipe-search.p.rapidapi.com'
             )));
         if (is_wp_error($response)) {
