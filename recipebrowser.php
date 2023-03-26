@@ -15,26 +15,19 @@ Text Domain: yibist-plugin
 
 defined('ABSPATH') or die('no');
 class RecipeBrowser {
-    public shortcodeyanni $shortcodeyanni;
-    public randomshort $randomshort;
+    public shortcode $shortcode;
 
     function __construct() {
-        include_once 'shortcodeyanni.php';
-        include_once 'randomshort.php';
-        $this->shortcodeyanni = new shortcodeyanni();
-        $this->randomshort = new randomshort();
+        include_once 'shortcode.php';
+        $this->shortcode = new shortcode();
     }
 
-
-
-    function register() {
-        add_shortcode( 'shortcodeyanni', array( $this->shortcodeyanni, 'shortcodeyanni' ) );
-        add_shortcode( 'rand_meal_shortcode', array( $this->randomshort, 'rand_meal_shortcode' ) );
+    function register(): void {
+        add_shortcode( 'testShortcode', array( $this->shortcode, 'testShortcode' ) );
+        add_shortcode( 'rand_meal_shortcode', array( $this->shortcode, 'rand_meal_shortcode' ) );
+        add_action('wp_enqueue_scripts', array($this->shortcode, 'enqueue'));
     }
-
-
 }
-
 
 if (class_exists('RecipeBrowser')) {
     $RecipeBrowser = new RecipeBrowser();
