@@ -28,7 +28,7 @@ class RecipeBrowser {
 
 
     function register() {
-        add_shortcode( 'testShortcode', array( $this->shortcodeyanni, 'testShortcode' ) );
+        add_shortcode( 'shortcodeyanni', array( $this->shortcodeyanni, 'shortcodeyanni' ) );
         add_shortcode( 'rand_meal_shortcode', array( $this->randomshort, 'rand_meal_shortcode' ) );
     }
 

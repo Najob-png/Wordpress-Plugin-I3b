@@ -5,7 +5,7 @@ class shortcodeyanni {
 
 	}
 
-	function testShortcode(): string {
+	function shortcodeyanni(): string {
 		if (!isset( $_POST['q'] ) ) {
 			$string =
 				"<body>
