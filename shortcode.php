@@ -7,95 +7,158 @@ class shortcode
     }
 
 
-    function testShortcode(): string {
-        if (!isset( $_POST['q'] ) ) {
-            $string =
-                "<body>
+	function shortcodeyanni(): string {
+		if (!isset( $_POST['q'] ) ) {
+			$string =
+				"<body>
 
 				<div class='topnav'>
 					
 					<div class='search-container'>
 						<form action='' method='post'>
 							<input type='text' placeholder='Search..' name='q'>
-							<label for='diet'>Choose a diet:</label>
+							<label for='diet'>diet:</label>
 
 							<select name='diet'>";
-            foreach (Api::$apiarglimits['diet'] as $value){
-                $string.="<option value='$value'>$value</option>";
-            }
+			foreach (Api::$apiarglimits['diet'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
 
 
-            $string.="</select>
-							
+			$string.="</select>
+							<label for='health'>health:</label>
 							<select name='health'>";
-            foreach (Api::$apiarglimits['health'] as $value){
-                $string.="<option value='$value'>$value</option>";
-            }
+			foreach (Api::$apiarglimits['health'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
 
 
-            $string.="</select>
-							<button type='submit'><i class='fa fa-search'></i></button>
-						</form>
-					</div>
-				</div>
-				</body>";
-        }
-        if ( isset( $_POST['q'] ) ) {
+			$string.="</select><br>
+							<label for='cuisineType'>cuisinetype:</label>
+							<select name='cuisineType'>";
+			foreach (Api::$apiarglimits['cuisineType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
 
-            $data = Api::data($_POST['q'],array('diet'=>$_POST['diet'],'health'=>$_POST['health']));
-            $string =
-                "<body>
 
-				<div class='topnav'>
-					
-					<div class='search-container'>
-						<form action='' method='post'>
-							<input type='text' placeholder='Search..' name='q'>
-							<label for='diet'>Choose a diet:</label>
+			$string.="</select>
+							<label for='mealType'>mealtype:</label>
+							<select name='mealType'>";
+			foreach (Api::$apiarglimits['mealType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
 
-							<select name='diet'>
-							  <option value='balanced'>balanced</option>
-							  <option value='high-fiber'>high-fiber</option>
-							  <option value='high-protein'>high-protein</option>
-							  <option value='low-carb'>low-carb</option>
-							  <option value='low-fat'>low-fat</option>
-							  <option value='low-sodium'>low-sodium</option>
-							</select>
-							
-							<label for='health'>Choose health:</label>
 
-							<select name='health'>
-							  <option value='vegan'>vegan</option>
-							  <option value='vegetarian'>vegetarian</option>
-							  <option value='low-sugar'>low-sugar</option>
-							</select>
-							<button type='submit'><i class='fa fa-search'></i></button>
+			$string.="</select><br>
+							<label for='dishType'>dishtype:</label>
+							<select name='dishType'>";
+			foreach (Api::$apiarglimits['dishType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select><br><br>
+							<button type='submit'>Submit</button>
 						</form>
 					</div>
 				</div>
 				<table>
 				  <tr>
 				    <th>Name</th>
-				    
+				    <th>Picture</th>
+				  </tr>
+				</body>";
+		}
+		if ( isset( $_POST['q'] ) ) {
+
+			$data = Api::data(array($_POST['q'],$_POST['diet'],$_POST['health'],$_POST['cuisineType'],$_POST['mealType'],$_POST['dishType']));
+			if(is_string($data)){
+				return "<body>
+				<a>$data</a>
+				</body>";
+
+			}
+			$string =
+				"<body>
+
+				<div class='topnav'>
+					
+					<div class='search-container'>
+						<form action='' method='post'>
+							<input type='text' placeholder='Search..' name='q'>
+							<label for='diet'>diet:</label>
+
+							<select name='diet'>";
+			foreach (Api::$apiarglimits['diet'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select>
+							<label for='health'>health:</label>
+							<select name='health'>";
+			foreach (Api::$apiarglimits['health'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select><br>
+							<label for='cuisineType'>cuisinetype:</label>
+							<select name='cuisineType'>";
+			foreach (Api::$apiarglimits['cuisineType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select>
+							<label for='mealType'>mealtype:</label>
+							<select name='mealType'>";
+			foreach (Api::$apiarglimits['mealType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select><br>
+							<label for='dishType'>dishtype:</label>
+							<select name='dishType'>";
+			foreach (Api::$apiarglimits['dishType'] as $value){
+				$string.="<option value='$value'>$value</option>";
+			}
+
+
+			$string.="</select><br><br>
+							<button type='submit'>Submit</button>
+						</form>
+					</div>
+				</div>
+				<table>
+				  <tr>
+				    <th>Name</th>
+				    <th>Picture</th>
+				  </tr>
+				</body>";
+
+			foreach ($data['hits'] as $key => $value) {
+				$url = $value['recipe']['url'];
+				$image = $value['recipe']['image'];
+				$lable = $value['recipe']['label'];
+				$string .="	  
+				  
+				  <tr>
+				    <td>$lable</td>
+                    <td><a href='$url ' target='_blank'><img src='$image'width='125' height='150'></a> </td>
+                    
+
 				  </tr>
 				  ";
-            var_dump($data);
-            /*foreach ($data['hits'] as $key => $value) {
-                $lable = $value['recipe']['label'];
-                $string .="
-              <tr>
-                <td>$lable</td>
+			}
 
-              </tr>
-              ";
-            }*/
-
-            echo "
+			echo "
 				</table>
 				</body>";
-        }
-        return $string;
-    }
+		}
+		return $string;
+	}
     function rand_meal_shortcode(): string
     {
 
