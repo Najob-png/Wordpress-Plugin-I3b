@@ -178,34 +178,74 @@ class shortcode
 		}
 		return $string;
 	}
-    function rand_meal_shortcode(): string
-    {
+	function rand_meal_shortcode(): string
+	{
 
 
-        if (isset($_POST['ingredient'])) {
-            $ingredient = $_POST['ingredient'];
-            $meal_number = mt_rand(1, 10);
+		if (isset($_POST['ingredient'])) {
+			$ingredient = $_POST['ingredient'];
+			$meal_number = mt_rand(1, 10);
 
-            $data = Api::data($ingredient, array('high-protein'));
-            $field = '<form action="" method="post">
+			$data = Api::data(array($ingredient, 'Breakfast'));
+			$data1 = Api::data(array($ingredient, 'Lunch'));
+			$data2 = Api::data(array($ingredient, 'Dinner'));
+
+			$field = '<form action="" method="post">
       <input type="text" name="ingredient" title="ingredient" id="ingredient" placeholder="Search...">
         <input type="submit" name="submit" id="submit"> 
         
         
 </form>';
 
-            $label = $data['hits'][$meal_number]['recipe']['label'];
-            $field .= "<br> <p>$label</p>";
+			$label = $data['hits'][$meal_number]['recipe']['label'];
+			$url = $data['hits'][$meal_number]['recipe']['url'];
+			$image = $data['hits'][$meal_number]['recipe']['image'];
 
-        } else {
-            $field = '<form action="" method="post">
+			$label1 = $data1['hits'][$meal_number]['recipe']['label'];
+			$url1 = $data1['hits'][$meal_number]['recipe']['url'];
+			$image1 = $data1['hits'][$meal_number]['recipe']['image'];
+
+			$label2 = $data2['hits'][$meal_number]['recipe']['label'];
+			$url2 = $data2['hits'][$meal_number]['recipe']['url'];
+			$image2 = $data2['hits'][$meal_number]['recipe']['image'];
+
+
+
+			$field .= "<br> <p>Breackfast</p><br><p>$label</p> <br>
+                         <a href=$url><img src='$image' width='250' height='300'></a>
+                        ";
+			foreach ($data['hits'][$meal_number]['recipe']['ingredientLines'] as $item => $value) {
+
+				$field .= " <p>$value</p>";
+			}
+			$field .= "<br> <p>Lunch</p><br><p>$label1</p> <br>
+                        <a href=$url1><img src='$image1' width='250' height='300'> </a>
+                        ";
+			foreach ($data1['hits'][$meal_number]['recipe']['ingredientLines'] as $item => $value) {
+
+				$field .= "<p>$value</p> ";
+			}
+
+			$field .= "<br><p>Dinner</p><br><br> <p>$label2</p> <br>
+                        <a href=$url2><img src='$image2' width='250' height='300'></a>
+                        ";
+			foreach ($data2['hits'][$meal_number]['recipe']['ingredientLines'] as $item => $value) {
+
+				$field .= " <p>$value</p> ";
+			}
+
+
+		} else {
+			$field = '<form action="" method="post">
       <input type="text" name="ingredient" title="ingredient" id="ingredient" placeholder="Search...">
-        <input type="submit" name="submit" id="submit">  
+        <input type="submit" name="submit" id="submit"> 
+        
+        
 </form>';
 
-        }
+		}
 
-        return $field;
+		return $field;
 
-    }
+	}
 }
