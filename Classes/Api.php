@@ -2,8 +2,7 @@
 
 class Api
 {
-    public static array $apiargs = array();
-    public static array $apiarglimits = array( 'diet' => array(
+    public static array $apiarglimits = array('diet' => array(
         "balanced",
         "high-protein",
         "low-carb",
@@ -68,19 +67,30 @@ class Api
             "Soup",
             "Starter",
             "Sweets"));
-    public static function data(string $q, ?array $args)
+
+    public static function data(?array $args)
     {
-        $url = "https://edamam-recipe-search.p.rapidapi.com/search?q=$q";
+        //var_dump($args);
+        $url = "https://edamam-recipe-search.p.rapidapi.com/search?";
         $append = "";
-        // args = array of string
+        $qset = false;
+        $fset = false;
         if (isset($args)) {
-            if (count($args) != count($args, COUNT_RECURSIVE)) {
+            if (array_key_exists('q', $args)) {
+                $q = $args['q'];
+                $append .= "q=$q";
+            }
+            if (is_int(array_key_first($args))) {
                 $used = array();
                 foreach ($args as $val) {
+                    if (!isset($val) or strlen($val) < 1) {
+                        continue;
+                    }
                     $found = false;
-                    foreach (Api::$apiarglimits /* array(argLim) of arrays ($val2) */ as $key2 => $val2) {
+                    foreach (Api::$apiarglimits as $key2 => $val2) {
                         if (in_array($val, $val2)) {
-                            $append .= "&" . $key2 . "=" . $val;
+                            $append .= "&$key2=$val";
+
                             if (isset($used[$key2])) {
                                 $used[$key2] += 1;
                             } else {
@@ -93,7 +103,15 @@ class Api
                         }
                     }
                     if (!$found) {
-                        return "wrong parameters were set";
+                        $append .= "&q=$val";
+                        if ($qset) {
+                            return "wrong parameters were set";
+                        }
+                        $qset = true;
+                    }
+                    if (!$fset) {
+                        $append = substr($append, 1);
+                        $fset = true;
                     }
                 }
                 /*
@@ -114,8 +132,10 @@ class Api
                 */
             } else {
                 foreach ($args as $key => $val) {
-                    if (!in_array($key,self::$apiarglimits))
-                    {
+                    if (!isset($val) or strlen($val) < 1) {
+                        continue;
+                    }
+                    if (!array_key_exists($key, self::$apiarglimits)) {
                         return 'a wrong api parameter was inserted';
                     }
                     $append .= "&" . $key . "=" . $val;
@@ -124,24 +144,19 @@ class Api
             $url .= $append;
         }
 
-        if (!array_key_exists("q=$q$append", self::$apiargs)) {
-            $response = wp_remote_get($url, array(
-                'timeout' => 300,
-                'httpversion' => '1.1',
-                'headers' => array(
-                    'X-RapidAPI-Key' => 'cafa3125b2msh6787cd3e1a59ffdp137c38jsnaf2104651e12',
-                    'X-RapidAPI-Host' => 'edamam-recipe-search.p.rapidapi.com'
-                )));
-            if (is_wp_error($response)) {
-                return 'something went wrong while getting data';
-            } else {
-                $response_data = wp_remote_retrieve_body($response);
-                $decoded_data = json_decode($response_data, true);
-                self::$apiargs["q=$q$append"] = $decoded_data;
-                return $decoded_data;
-            }
+        $response = wp_remote_get($url, array(
+            'timeout' => 300,
+            'httpversion' => '1.1',
+            'headers' => array(
+                'X-RapidAPI-Key' => 'cafa3125b2msh6787cd3e1a59ffdp137c38jsnaf2104651e12',
+                'X-RapidAPI-Host' => 'edamam-recipe-search.p.rapidapi.com'
+            )));
+        if (is_wp_error($response)) {
+            return 'something went wrong while getting data';
         } else {
-            return self::$apiargs["q=$q$append"];
+            $response_data = wp_remote_retrieve_body($response);
+            $decoded_data = json_decode($response_data, true);
+            return $decoded_data;
         }
     }
 }
