@@ -14,7 +14,6 @@ Text Domain: yibist-plugin
 */
 
 defined('ABSPATH') or die('no');
-
 class RecipeBrowser {
     public shortcodeyanni $shortcodeyanni;
     public randomshort $randomshort;
@@ -33,9 +32,11 @@ class RecipeBrowser {
         add_shortcode( 'rand_meal_shortcode', array( $this->randomshort, 'rand_meal_shortcode' ) );
     }
 
+
 }
 
-if (class_exists('RecipeBrowser')){
+
+if (class_exists('RecipeBrowser')) {
     $RecipeBrowser = new RecipeBrowser();
 	$RecipeBrowser->register();
 }
